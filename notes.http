@@ -1,0 +1,17 @@
+GET http://localhost:8080/notes
+Accept: application/json
+
+###
+
+POST http://localhost:8080/notes
+Content-Type: application/json
+
+{
+  "firstname": "Petr",
+  "lastname": "Bouda",
+  "email": "bouda.petr@gmail.com",
+  "subject": "My First Note",
+  "content": "This is my very first note"
+}
+
+###
