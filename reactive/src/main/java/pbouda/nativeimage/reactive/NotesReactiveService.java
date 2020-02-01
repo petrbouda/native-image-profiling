@@ -14,7 +14,7 @@ import java.util.concurrent.CompletionStage;
 @ApplicationScoped
 public class NotesReactiveService {
 
-    private static final Bson FROM_NEWEST_SORTING = RawBsonDocument.parse("{ _id: -1 }");
+    private static final Bson FROM_NEWEST_SORTING = RawBsonDocument.parse("{ $natural: -1 }");
 
     private final ReactiveMongoCollection<Document> collection;
 
@@ -24,7 +24,7 @@ public class NotesReactiveService {
     }
 
     public CompletionStage<List<Note>> list(int limit) {
-        return collection.find(FROM_NEWEST_SORTING)
+        return collection.find()
                 .limit(limit)
                 .map(NotesReactiveService::toNote)
                 .toList()

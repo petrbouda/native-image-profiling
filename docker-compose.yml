@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+  prometheus:
+    container_name: prometheus
+    image: "prom/prometheus"
+    network_mode: host
+    volumes:
+      - ./etc/prometheus.yml:/etc/prometheus/prometheus.yml
+  grafana:
+    container_name: grafana
+    image: "grafana/grafana"
+    network_mode: host
+    volumes:
+      - ./etc/provisioning/datasources:/etc/grafana/provisioning/datasources
+      - ./etc/provisioning/dashboards:/etc/grafana/provisioning/dashboards
+      - ./etc/dashboards:/var/lib/grafana/dashboards
+      - ./etc/grafana.ini:/etc/grafana/grafana.ini
