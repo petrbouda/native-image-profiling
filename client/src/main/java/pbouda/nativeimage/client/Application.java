@@ -23,7 +23,7 @@ public class Application {
 
     private static final Lorem LOREM = LoremIpsum.getInstance();
 
-    private static final Duration EXECUTION_TIME = Duration.ofMinutes(1);
+    private static final Duration EXECUTION_TIME = Duration.ofMinutes(10);
 
     static {
         try {

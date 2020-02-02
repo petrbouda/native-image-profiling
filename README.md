@@ -1,16 +1,5 @@
 # Native-Image Profiling
 
-### Install TOOLS
-
-Install PSRECORD tool (visualization tool)
-```
-sudo apt install python3-pip
-pip install psrecord
-pip install matplotlib
-```
-
-### Build APP
-
 Build the Apps and Docker Images:
 ```
 mvn package -Pnative-server,native-client &&
