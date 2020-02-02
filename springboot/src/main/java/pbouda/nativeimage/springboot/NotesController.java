@@ -1,5 +1,6 @@
 package pbouda.nativeimage.springboot;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -16,7 +17,7 @@ public class NotesController {
 
     @GetMapping
     public Flux<Note> list(@RequestParam(name = "limit", defaultValue = "10") int limit) {
-        return service.findAll()
+        return service.findAll(Sort.by(Sort.Order.desc("$natural")))
                 .limitRequest(limit);
     }
 
