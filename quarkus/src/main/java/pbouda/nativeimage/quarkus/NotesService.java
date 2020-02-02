@@ -1,4 +1,4 @@
-package pbouda.nativeimage.imperative;
+package pbouda.nativeimage.quarkus;
 
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;

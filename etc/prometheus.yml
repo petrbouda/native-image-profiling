@@ -2,7 +2,7 @@ global:
   scrape_interval:     5s # Set the scrape interval to every 5 seconds.
   evaluation_interval: 5s # Evaluate rules every 5 seconds.
 scrape_configs:
-  - job_name: 'websocket-broadcast'
-    metrics_path: '/prometheus'
+  - job_name: 'server-scraping'
+    metrics_path: '/metrics'
     static_configs:
       - targets: ['localhost:8080']

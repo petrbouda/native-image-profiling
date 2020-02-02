@@ -1,4 +1,4 @@
-package pbouda.nativeimage.reactive;
+package pbouda.nativeimage.quarkus;
 
 import javax.json.bind.annotation.JsonbCreator;
 import javax.json.bind.annotation.JsonbProperty;

@@ -10,7 +10,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>reactive</artifactId>
+    <artifactId>quarkus</artifactId>
 
     <dependencies>
         <dependency>
@@ -28,6 +28,10 @@
         <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongo-java-driver</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-metrics</artifactId>
         </dependency>
     </dependencies>
 

@@ -23,6 +23,8 @@ public class Application {
 
     private static final Lorem LOREM = LoremIpsum.getInstance();
 
+    private static final Duration EXECUTION_TIME = Duration.ofMinutes(1);
+
     static {
         try {
             ENDPOINT_URI = new URI("http://localhost:8080/notes");
@@ -36,7 +38,11 @@ public class Application {
                 .connectTimeout(Duration.ofSeconds(1))
                 .build();
 
-        invoke(httpClient, post());
+        ScheduledExecutorService exitExecutors = Executors.newSingleThreadScheduledExecutor();
+        exitExecutors.schedule(() -> {
+            System.out.println("Client is about to exit! Time is over! Seconds: " + EXECUTION_TIME.toSeconds());
+            System.exit(0);
+        }, EXECUTION_TIME.toSeconds(), TimeUnit.SECONDS);
 
         ScheduledExecutorService getExecutors = Executors.newSingleThreadScheduledExecutor();
         getExecutors.scheduleAtFixedRate(() -> invoke(httpClient, get()), 0, 200, TimeUnit.MILLISECONDS);

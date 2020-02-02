@@ -10,8 +10,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>reactive</module>
-        <module>imperative</module>
+        <module>quarkus</module>
+        <module>springboot</module>
         <module>client</module>
     </modules>
 

@@ -1,6 +1,0 @@
-FROM registry.access.redhat.com/ubi8/ubi-minimal
-WORKDIR /work/
-COPY reactive/target/*-runner /work/server-test-application
-RUN chmod 775 -R /work
-EXPOSE 8080
-CMD ["./server-test-application", "-Dquarkus.http.host=0.0.0.0"]

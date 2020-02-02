@@ -1,6 +1,0 @@
-FROM adoptopenjdk/openjdk11
-WORKDIR /work/
-COPY imperative/target/lib /work/lib
-COPY imperative/target/*-runner.jar /work/server-test-application.jar
-RUN chmod 775 -R /work
-ENTRYPOINT java -jar server-test-application.jar

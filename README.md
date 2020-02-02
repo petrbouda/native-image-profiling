@@ -11,28 +11,22 @@ pip install matplotlib
 
 ### Build APP
 
-Build the project:
+Build the Apps and Docker Images:
 ```
-mvn package -Pnative-server,native-client
-```
-
-Create Docker Images:
-```
-docker build -f reactive/src/main/docker/Dockerfile.jvm -t quarkus-reactive-jvm . &&
-docker build -f reactive/src/main/docker/Dockerfile.native -t quarkus-reactive-native . &&
-docker build -f imperative/src/main/docker/Dockerfile.jvm -t quarkus-imperative-jvm . &&
-docker build -f imperative/src/main/docker/Dockerfile.native -t quarkus-imperative-native . &&
+mvn package -Pnative-server,native-client &&
+docker build -f quarkus/src/main/docker/Dockerfile.jvm -t quarkus-jvm . &&
+docker build -f quarkus/src/main/docker/Dockerfile.native -t quarkus-native . &&
 docker build -f springboot/src/main/docker/Dockerfile.jvm -t springboot-jdk .
 ```
 
-Run Mongo Server:
+Start INFRASTRUCTURE (Grafana / Prometheus / MongoDB):
 ```
-docker run -ti --rm -p 27017:27017 mongo:4.0
+docker compose up
 ```
 
 Run Reactive Quarkus Native Server:
 ```
-docker rm server && docker run -it --memory 200MB --cpus 2 --network host --name server quarkus-reactive-jvm
+docker rm server && docker run -it --memory 200MB --cpus 2 --network host --name server quarkus-jvm
 ```
 
 Get PID (see what is the mapped PID from docker):

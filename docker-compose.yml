@@ -15,3 +15,7 @@ services:
       - ./etc/provisioning/dashboards:/etc/grafana/provisioning/dashboards
       - ./etc/dashboards:/var/lib/grafana/dashboards
       - ./etc/grafana.ini:/etc/grafana/grafana.ini
+  mongodb:
+    container_name: mongodb
+    image: mongo:4.0
+    network_mode: host

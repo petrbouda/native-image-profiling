@@ -1,4 +1,4 @@
-package pbouda.nativeimage.imperative;
+package pbouda.nativeimage.quarkus;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
