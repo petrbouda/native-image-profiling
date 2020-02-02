@@ -19,26 +19,14 @@ docker build -f quarkus/src/main/docker/Dockerfile.native -t quarkus-native . &&
 docker build -f springboot/src/main/docker/Dockerfile.jvm -t springboot-jdk .
 ```
 
-Start INFRASTRUCTURE (Grafana / Prometheus / MongoDB):
+Start INFRASTRUCTURE (Grafana / Prometheus / MongoDB / cAdvisor):
 ```
 docker compose up
 ```
 
 Run Reactive Quarkus Native Server:
 ```
-docker rm server && docker run -it --memory 200MB --cpus 2 --network host --name server quarkus-jvm
+docker run -it --memory 200MB --cpus 2 --network host --name server quarkus-native
 ```
 
-Get PID (see what is the mapped PID from docker):
-```
-# Grep from ps according to a full process name
-pgrep -f server-test-application
-
-# Docker way
-docker top server
-```
-
-Connect PSRECORD: 
-```
-psrecord $(pgrep -f server-test-application) --plot application.png
-```
+Open cAdvisor: http://localhost:8081

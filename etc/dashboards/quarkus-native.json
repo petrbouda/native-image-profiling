@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 2,
+  "id": 5,
   "links": [],
   "panels": [
     {
@@ -23,10 +23,11 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": null,
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 10,
+        "h": 8,
         "w": 12,
         "x": 0,
         "y": 0
@@ -38,6 +39,7 @@
         "current": true,
         "max": true,
         "min": true,
+        "rightSide": false,
         "show": true,
         "total": false,
         "values": true
@@ -52,22 +54,29 @@
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [],
+      "seriesOverrides": [
+        {}
+      ],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
       "targets": [
         {
-          "expr": "increase(logback_events_total{level=~\"error\"}[1m])",
-          "legendFormat": "{{instance_label}} - {{level}}",
+          "expr": "sum(base_memory_usedHeap_bytes)",
+          "legendFormat": "Used",
           "refId": "A"
+        },
+        {
+          "expr": "sum(base_memory_committedHeap_bytes)",
+          "legendFormat": "Commited",
+          "refId": "B"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Log Events - Error",
+      "title": "Total Heap Memory",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -83,7 +92,7 @@
       },
       "yaxes": [
         {
-          "format": "short",
+          "format": "decbytes",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -109,10 +118,11 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": null,
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 10,
+        "h": 8,
         "w": 12,
         "x": 12,
         "y": 0
@@ -144,16 +154,21 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "increase(logback_events_total{level=~\"error|warn|info\"}[1m])",
-          "legendFormat": "{{instance_label}} - {{level}}",
+          "expr": "sum(vendor_memory_usedNonHeap_bytes)",
+          "legendFormat": "Used",
           "refId": "A"
+        },
+        {
+          "expr": "sum(vendor_memory_committedNonHeap_bytes)",
+          "legendFormat": "Committed",
+          "refId": "B"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Log Events - Info/Warn/Error",
+      "title": "Total Non-Heap Memory",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -169,7 +184,7 @@
       },
       "yaxes": [
         {
-          "format": "short",
+          "format": "decbytes",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -192,24 +207,118 @@
     },
     {
       "aliasColors": {},
-      "bars": false,
+      "bars": true,
       "dashLength": 10,
       "dashes": false,
+      "datasource": null,
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 10,
+        "h": 7,
         "w": 12,
         "x": 0,
-        "y": 10
+        "y": 8
       },
-      "id": 6,
+      "id": 16,
       "legend": {
         "alignAsTable": true,
         "avg": true,
-        "current": true,
+        "current": false,
         "max": true,
         "min": true,
+        "show": true,
+        "total": true,
+        "values": true
+      },
+      "lines": false,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "increase(base_gc_total{name=\"young generation scavenger\"}[15s])",
+          "legendFormat": "Young GC",
+          "refId": "A"
+        },
+        {
+          "expr": "increase(base_gc_total{name=\"complete scavenger\"}[15s])",
+          "legendFormat": "Complete GC",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "GC Count (Young / Complete)",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "locale",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "id": 18,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "max": true,
+        "min": true,
+        "rightSide": false,
         "show": true,
         "total": false,
         "values": true
@@ -230,16 +339,110 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "process_files_open_files",
-          "legendFormat": "{{instance_label}} - Opened Files",
+          "expr": "rate(base_gc_time_total_seconds{name=\"complete scavenger\"}[15s])/rate(base_gc_total{name=\"complete scavenger\"}[15s])",
+          "instant": false,
+          "intervalFactor": 1,
+          "legendFormat": "Complete",
           "refId": "A"
+        },
+        {
+          "expr": "rate(base_gc_time_total_seconds{name=\"young generation scavenger\"}[15s])/rate(base_gc_total{name=\"young generation scavenger\"}[15s])",
+          "legendFormat": "Young",
+          "refId": "B"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "File Descriptors",
+      "title": "GC Pause Time (Young / Complete)",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "s",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 15
+      },
+      "id": 21,
+      "legend": {
+        "alignAsTable": false,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "show": false,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "base_thread_count",
+          "legendFormat": "All Live",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Threads",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -281,15 +484,16 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": null,
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 10,
+        "h": 6,
         "w": 12,
         "x": 12,
-        "y": 10
+        "y": 15
       },
-      "id": 7,
+      "id": 23,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -316,13 +520,13 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "system_load_average_1m",
-          "legendFormat": "{{instance_label}} - Opened Files",
+          "expr": "base_cpu_systemLoadAverage",
+          "legendFormat": "System Average Loade",
           "refId": "A"
         },
         {
-          "expr": "system_cpu_count",
-          "legendFormat": "CPU Core Size - {{instance_label}}",
+          "expr": "base_cpu_availableProcessors",
+          "legendFormat": "CPU Size",
           "refId": "B"
         }
       ],
@@ -366,107 +570,17 @@
         "align": false,
         "alignLevel": null
       }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 10,
-        "w": 12,
-        "x": 0,
-        "y": 20
-      },
-      "id": 8,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": true,
-        "max": true,
-        "min": true,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "system_cpu_usage",
-          "legendFormat": "System CPU Usage - {{instance_label}}",
-          "refId": "A"
-        },
-        {
-          "expr": "process_cpu_usage",
-          "legendFormat": "Process CPU Usage - {{instance_label}}",
-          "refId": "B"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "CPU Usage",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "percentunit",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
     }
   ],
-  "schemaVersion": 19,
+  "refresh": false,
+  "schemaVersion": 20,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
@@ -484,7 +598,7 @@
     ]
   },
   "timezone": "",
-  "title": "SYSTEM Broadcaster",
-  "uid": "nM2XcRFZz",
-  "version": 7
+  "title": "Quarkus Native",
+  "uid": "quarkus-native",
+  "version": 15
 }

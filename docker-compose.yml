@@ -19,3 +19,14 @@ services:
     container_name: mongodb
     image: mongo:4.0
     network_mode: host
+  cadvisor:
+    container_name: cadvisor
+    image: "gcr.io/google-containers/cadvisor"
+    ports:
+      - "8081:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
