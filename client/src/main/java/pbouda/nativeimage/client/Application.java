@@ -20,6 +20,7 @@ public class Application {
 
     private static final Duration SOCKET_TIMEOUT = Duration.ofSeconds(1);
     private static final URI ENDPOINT_URI;
+    private static final URI ENDPOINT_WORDS_URI;
 
     private static final Lorem LOREM = LoremIpsum.getInstance();
 
@@ -28,6 +29,7 @@ public class Application {
     static {
         try {
             ENDPOINT_URI = new URI("http://localhost:8080/notes");
+            ENDPOINT_WORDS_URI = new URI("http://localhost:8080/notes/words");
         } catch (URISyntaxException e) {
             throw new RuntimeException("Cannot parse endpoint url", e);
         }
@@ -67,13 +69,21 @@ public class Application {
                 .uri(ENDPOINT_URI);
     }
 
+    private static HttpRequest.Builder requestWordsBuilder() {
+        return HttpRequest.newBuilder()
+                .header("Content-Type", "application/json")
+                .header("Accept", "application/json")
+                .timeout(SOCKET_TIMEOUT)
+                .uri(ENDPOINT_URI);
+    }
+
     private static HttpRequest post() {
         JsonObject json = Json.createObjectBuilder()
                 .add("firstname", LOREM.getFirstName())
                 .add("lastname", LOREM.getLastName())
                 .add("email", LOREM.getEmail())
                 .add("subject", LOREM.getTitle(10))
-                .add("content", LOREM.getParagraphs(5, 50))
+                .add("content", LOREM.getParagraphs(5, 15))
                 .build();
 
         String body = json.toString();

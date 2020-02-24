@@ -1,9 +1,7 @@
-package pbouda.nativeimage.quarkus;
+package pbouda.nativeimage.quarkusisolates;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.lang.management.ManagementFactory;
-import java.lang.management.MemoryMXBean;
 import java.util.List;
 
 @Path("/notes")
@@ -19,18 +17,17 @@ public class NotesResource {
 
     @GET
     public List<Note> list(@DefaultValue("10") @QueryParam("limit") int limit) {
-
-//        int parallelism = ForkJoinPool.commonPool().getParallelism();
-//        System.out.println("FORK_JOIN_POOL:  parallelism: " + parallelism);
-        MemoryMXBean memoryMXBean = ManagementFactory.getMemoryMXBean();
-        System.out.println("HEAP MEMORY: " + memoryMXBean.getHeapMemoryUsage());
-//        System.out.println("NON-HEAP MEMORY: " + memoryMXBean.getNonHeapMemoryUsage());
-
         return service.list(limit);
     }
 
     @POST
     public String post(Note note) {
         return service.add(note);
+    }
+
+    @GET
+    @Path("words")
+    public int words(@DefaultValue("10") @QueryParam("limit") int limit) {
+        return service.words(limit);
     }
 }

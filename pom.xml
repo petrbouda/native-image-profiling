@@ -11,6 +11,7 @@
 
     <modules>
         <module>quarkus</module>
+        <module>quarkus-isolates</module>
         <module>springboot</module>
         <module>client</module>
     </modules>

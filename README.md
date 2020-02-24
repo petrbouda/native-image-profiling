@@ -5,6 +5,7 @@ Build the Apps and Docker Images:
 mvn package -Pnative-server,native-client &&
 docker build -f quarkus/src/main/docker/Dockerfile.jvm -t quarkus-jvm . &&
 docker build -f quarkus/src/main/docker/Dockerfile.native -t quarkus-native . &&
+docker build -f quarkus-isolates/src/main/docker/Dockerfile.native -t quarkus-isolates-native . &&
 docker build -f springboot/src/main/docker/Dockerfile.jvm -t springboot-jdk .
 ```
 
