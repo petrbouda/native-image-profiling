@@ -9,6 +9,12 @@ docker build -f quarkus-isolates/src/main/docker/Dockerfile.native -t quarkus-is
 docker build -f springboot/src/main/docker/Dockerfile.jvm -t springboot-jdk .
 ```
 
+```
+mvn package -Pnative-server &&
+docker build -f quarkus/src/main/docker/Dockerfile.jvm -t quarkus-jvm . &&
+docker build -f quarkus/src/main/docker/Dockerfile.native -t quarkus-native .
+```
+
 Start INFRASTRUCTURE (Grafana / Prometheus / MongoDB / cAdvisor):
 ```
 docker compose up

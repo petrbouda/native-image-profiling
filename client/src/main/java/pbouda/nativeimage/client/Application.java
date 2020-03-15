@@ -5,7 +5,6 @@ import com.thedeanda.lorem.LoremIpsum;
 
 import javax.json.Json;
 import javax.json.JsonObject;
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
@@ -28,8 +27,8 @@ public class Application {
 
     static {
         try {
-            ENDPOINT_URI = new URI("http://localhost:8080/notes");
-            ENDPOINT_WORDS_URI = new URI("http://localhost:8080/notes/words");
+            ENDPOINT_URI = new URI("http://localhost:8090/notes");
+            ENDPOINT_WORDS_URI = new URI("http://localhost:8090/notes/words");
         } catch (URISyntaxException e) {
             throw new RuntimeException("Cannot parse endpoint url", e);
         }

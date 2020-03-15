@@ -2,4 +2,4 @@ FROM registry.access.redhat.com/ubi8/ubi-minimal
 WORKDIR /work/
 COPY quarkus/target/*-runner /work/server-test-application
 RUN chmod 775 -R /work
-CMD ["./server-test-application", "-Dquarkus.http.host=0.0.0.0"]
+CMD ["./server-test-application -Xmx50m -Xmn25m", "-Dquarkus.http.host=0.0.0.0"]
